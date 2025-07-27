@@ -40,6 +40,7 @@ public class ProductController {
 	//update
 	@PutMapping("/products/{id}")
 	public Product updateProduct(@PathVariable int id, @RequestBody Product product) {
+		
 	    product.setId(id); // Ensure the ID matches the path variable
 	    return productRepository.save(product);
 	}
