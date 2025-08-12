@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+
+/myproductsrestapi/src/main/java/com/examplewithdatabase/springrest/security/SecurityConfig.java
