@@ -33,3 +33,11 @@ build/
 .vscode/
 
 /myproductsrestapi/src/main/java/com/examplewithdatabase/springrest/security/SecurityConfig.java
+
+/target/
+*.jar
+*.war
+*.ear
+*.class
+application*.properties
+application*.yml
