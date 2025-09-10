@@ -39,5 +39,5 @@ build/
 *.war
 *.ear
 *.class
-application*.properties
-application*.yml
+//application*.properties
+//application*.yml

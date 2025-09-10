@@ -1,6 +1,7 @@
 package com.examplewithdatabase.springrest.controller;
 
 import java.util.List;
+//import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.examplewithdatabase.springrest.dto.ApiResponse;
@@ -43,6 +45,8 @@ public class ProductController {
 		List<Product> products = productRepository.findAll();
 		 return ResponseEntity.ok(new ApiResponse<>(true, "Products retrieved", products));
 	 }
+	
+	//Request a product by id
 	@GetMapping("/{id}")
 	 public ResponseEntity<ApiResponse<Product>> getProduct(@PathVariable int id){
 		 
@@ -53,6 +57,22 @@ public class ProductController {
 	                        .body(new ApiResponse<>(false, "Product not found", null)));
 	 }
 	
+	//Request a product by name 
+	///api/public/products?name=Asus
+	//select * from product where name like "Asus%";
+@GetMapping("/product")
+	 public List<Product> getProductByName(@RequestParam @Valid String name ){
+		 //Product products = productRepository.findByName(name);
+		 //return name;
+	//String productName = name;
+				 return productRepository.findByNameContaining(name);
+						
+	 }
+	 
+/* .map(product -> ResponseEntity.ok(
+						     new ApiResponse<>(true, "Product found", product)))
+						 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND)
+								 .body(new ApiResponse<>(false, "Product not found", null)));*/
 	//update
 	@PutMapping("/{id}")
 	public ResponseEntity<ApiResponse<Product>> updateProduct(@PathVariable int id,@Valid @RequestBody Product product) {
@@ -67,6 +87,7 @@ public class ProductController {
 	     
 	   
 	}
+	
 	//Delete
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ApiResponse<Product>> deleteProduct(@PathVariable int id){
