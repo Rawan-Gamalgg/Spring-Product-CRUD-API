@@ -14,14 +14,25 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 private int id; 
-    @NotBlank(message = "Productname cannot be empty")
+    
+	@NotBlank(message = "Productname cannot be empty")
     @Size(min = 5, max = 100)
 private String name;
     @Size(max = 500)
 private String description;
     @Min(0)
 private double price;
-
+    
+public Product(@NotBlank(message = "Productname cannot be empty") @Size(min = 5, max = 100) String name,
+			@Size(max = 500) String description, @Min(0) double price) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.price = price;
+	}
+public Product() {
+	
+}
 public int getId() {
 	return id;
 }
